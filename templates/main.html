@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <title>Ambee Indoor Monitor</title>
+   <!-- Latest compiled and minified CSS -->
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+   <script type="text/javascript" charset="utf-8">
+var socket     
+ $(document).ready(function() {
+      	 socket = io.connect('http://' + document.domain + ':' + location.port);
+     // 	socket.on('connect', function() {
+     //     socket.emit('myevent', {data: 'I\'m connected!'});
+     // 	});
+      	socket.on('mac', function(msg) {
+	  var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#mac').text(msg.data).html();
+      	});
+      	socket.on('time', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#time').text(msg.data).html();
+      	});
+         socket.on('temp', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#temp').text(msg.data).html();
+      	});
+         socket.on('pressure', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#pressure').text(msg.data).html();
+      	});
+         socket.on('humudity', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#humudity').text(msg.data).html();
+      	});
+         socket.on('PM1', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#PM1').text(msg.data).html();
+      	});
+         socket.on('PM25', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#PM25').text(msg.data).html();
+      	});
+         socket.on('PM10', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#PM10').text(msg.data).html();
+      	});
+         socket.on('CO', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#CO').text(msg.data).html();
+      	});
+      	socket.on('HCHO', function(msg) {
+ 		var nDate = new Date();
+          $('#readingsUpdated').text(nDate.getHours() + 'h:' + nDate.getMinutes() +
+             'm:' + nDate.getSeconds() + 's').html();
+          $('#HCHO').text(msg.data).html();
+      	});
+      });
+
+function data1(){
+	
+socket.on('connect', function() {
+          socket.emit('myevent', {data: 'I\'m backedwdds!'});
+      	});
+console.log("sent from backed")
+
+
+}
+
+
+
+
+
+
+   </script>
+</head>
+
+<body>
+  
+   <h1><center><b>MQTT MSG READINGS (updated <span id="readingsUpdated"></span>)</h1>
+     <h2><b>MAC Address:</b> <span id="mac"></span></h2>
+     <h2><b>Time:</b> <span id="time"></span></h2>
+     &nbsp;&nbsp;&nbsp;
+     <h2><b>Temperature:</b> <span id="temp"></span></h2>
+   <h2><b>Humidity: </b><span id="humudity"></span></h2>
+   
+   <h2><b>Pressure: </b><span id="pressure"></span></h2>
+   <h2><b>PM1: </b><span id="PM1"></span></h2>
+   <h2><b>PM2.5:</b> <span id="PM25"></span></h2>
+   <h2><b>PM10: </b><span id="PM10"></span></h2>
+   <h2><b>CO2: </b><span id="CO"></span></h2>
+   <h2><b>HCHO: </b><span id="HCHO"></span></h2>
+
+
+ <form id="login" > 
+                
+				<div id="number" class="inputBox">
+                    <input type="text" name="Phone Number"  id="calno" required="">
+                    <label>no2 Callibartion</label>
+                </div>
+				
+                <div class="inputBox">
+                    <input id="calso2" type="text" name="password1"  required="">
+                    <label>so2 callibration</label>
+                </div>
+                <input id="submit" type="submit" name="" value="Login">
+				
+				
+            </form>
+     
+</body>
+<script>
+
+
+
+const submitform1 = (e) =>
+  {
+     e.preventDefault()
+  
+      semail = getinputval('calno')
+      
+      pwd = getinputval('calso2')
+     
+     
+     console.log(semail)
+     console.log(pwd)
+	 var obj = {"no2":semail,"co2":pwd}
+	//data1()
+ socket.emit('myevent', {data: obj});
+console.log(obj)
+     // savemessage(name,pwd)
+  
+  }
+  
+  
+  document.getElementById('login').addEventListener('submit',submitform1)
+  
+  
+  
+  getinputval = (id) => document.getElementById(id).value;
+</script>
+</html>
